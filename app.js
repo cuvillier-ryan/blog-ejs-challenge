@@ -18,12 +18,11 @@ app.use(bodyParser.urlencoded({
 app.use(express.static("public"));
 
 let posts = [];
-let newPost = "";
 
 app.get("/", function(req, res) {
   res.render("home", {
     startingContect: homeStartingContent,
-    newPost: newPost
+    posts: posts
   });
 });
 
@@ -50,7 +49,7 @@ app.post("/compose", function(req, res){
     content: req.body.postBody
   };
 
-  newPost = posts.push(post);
+  posts.push(post);
   res.redirect("/");
 
 
