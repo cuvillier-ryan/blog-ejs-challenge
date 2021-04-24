@@ -61,10 +61,12 @@ app.get("/posts/:postName", function(req, res){
 
   posts.forEach(function(post){
     const storedTitle = _.lowerCase(post.title);
+
     if(requestedTitle === storedTitle){
-      console.log("Match found!");
-    } else {
-      console.log("Not found");
+      res.render("post", {
+        postTitle: post.title,
+        postBody: post.content
+      });
     };
   });
 });
