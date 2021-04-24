@@ -16,6 +16,7 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({
   extended: true
 }));
+
 app.use(express.static("public"));
 
 let posts = [];
@@ -56,15 +57,17 @@ app.post("/compose", function(req, res){
 
 
 app.get("/posts/:postName", function(req, res){
-  const requestedTitle = req.params.postName;
+  const requestedTitle = _.lowerCase(req.params.postName);
 
   posts.forEach(function(post){
-    const storedTitle = post.title;
+    const storedTitle = _.lowerCase(post.title);
+
     if(requestedTitle === storedTitle){
-      console.log("Match found!");
-    } else {
-      console.log("Not found")
-    }
+      res.render("post", {
+        postTitle: post.title,
+        postBody: post.content
+      });
+    };
   });
 });
 
