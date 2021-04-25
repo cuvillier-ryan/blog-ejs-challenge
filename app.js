@@ -19,7 +19,8 @@ app.use(bodyParser.urlencoded({
 
 app.use(express.static("public"));
 
-let posts = [];
+const posts = [];
+
 
 app.get("/", function(req, res) {
   res.render("home", {
@@ -28,11 +29,13 @@ app.get("/", function(req, res) {
   });
 });
 
+
 app.get("/contact", function(req, res) {
   res.render("contact", {
     contactContent: contactContent
   });
 });
+
 
 app.get("/about", function(req, res) {
   res.render("about", {
@@ -40,9 +43,11 @@ app.get("/about", function(req, res) {
   });
 });
 
+
 app.get("/compose", function(req, res) {
   res.render("compose");
 });
+
 
 app.post("/compose", function(req, res){
 
@@ -70,10 +75,6 @@ app.get("/posts/:postName", function(req, res){
     };
   });
 });
-
-
-
-
 
 
 app.listen(3000, function() {
